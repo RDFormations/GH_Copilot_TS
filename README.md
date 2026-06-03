@@ -24,7 +24,6 @@ npm install
 npm run ex:01   # tri à bulles
 npm run ex:02   # structure Employee + sérialisation
 npm run ex:03   # parsing CSV
-npm run ex:04   # allocateur mémoire (pool)
 
 npm run corr:01 # correction
 ```
