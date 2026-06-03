@@ -1,0 +1,20 @@
+{
+  "name": "gh-copilot-ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ex:01": "tsx exercices/01_bubble_sort.ts",
+    "ex:02": "tsx exercices/02_employee_struct.ts",
+    "ex:03": "tsx exercices/03_csv_parser.ts",
+    "ex:04": "tsx exercices/04_memory_allocator.ts",
+    "corr:01": "tsx correction/01_bubble_sort.ts",
+    "corr:02": "tsx correction/02_employee_struct.ts",
+    "corr:03": "tsx correction/03_csv_parser.ts",
+    "corr:04": "tsx correction/04_memory_allocator.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
