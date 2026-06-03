@@ -8,6 +8,18 @@ Ce TP en propose une **version réduite**, adaptée à un cours **TypeScript** e
 
 ---
 
+## Fichiers fournis
+
+| Fichier | Rôle |
+| ------- | ---- |
+| `SUJET.md` | Énoncé (ce document) |
+| `checker.ts` | Vérificateur **standalone** — lit les opérations sur stdin |
+| `scripts/` | Scripts de test (`test_checker_50.sh`, `run_batch_50.sh`) |
+
+**Tout le reste est à développer** : `push_swap`, piles, opérations, parsing des arguments.
+
+---
+
 ## Objectif
 
 Écrire un programme **`push_swap`** qui :
@@ -19,13 +31,13 @@ Ce TP en propose une **version réduite**, adaptée à un cours **TypeScript** e
 ### Exemple
 
 ```bash
-npm run push_swap -- 3 1 2
+npx tsx src/push_swap.ts 3 1 2
 ```
 
 Sortie possible :
 
 ```
-sa
+ra
 pb
 pb
 pa
@@ -35,7 +47,7 @@ pa
 Vérification avec le checker fourni :
 
 ```bash
-npm run push_swap -- 3 1 2 | npm run checker -- 3 1 2
+npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
 # attendu : OK
 ```
 
@@ -47,34 +59,34 @@ npm run push_swap -- 3 1 2 | npm run checker -- 3 1 2
 | ----------------------------------- | ------------------------------------------------------ |
 | Centaines de valeurs                | **2 à 50** valeurs                                     |
 | Optimisation du nombre d'opérations | **Tri correct** obligatoire ; score d'ops en **bonus** |
-| Checker à écrire                    | **Checker fourni**                                     |
+| Checker à écrire                    | **Checker fourni** (`checker.ts`)                      |
 | Algorithmes avancés                 | Piles, opérations et **stratégie de tri à concevoir**  |
 
 ---
 
 ## Modèle des piles
 
-- **`a`** : contient tous les nombres au départ (voir `src/lib/stack.ts` et `parse.ts`).
+- **`a`** : contient tous les nombres au départ. Le **premier argument** est en **bas**, le **dernier** au **sommet**.
 - **`b`** : vide au départ.
 
 ```
-npm run push_swap -- 2 1 3
+npx tsx src/push_swap.ts 2 1 3
 
 Pile a (bas → haut) :  2  1  3     ← sommet = 3
 Pile b                : (vide)
 ```
 
-Représentation : **tableau** (`Stack.values`) avec helpers typés — même sémantique que la version C du laboratoire.
+Représentation au choix : **tableau**, **liste chaînée**, ou structure custom — tant que les opérations respectent la sémantique ci-dessous.
 
 ---
 
 ## Opérations à implémenter
 
-Fichier **`src/lib/operations.ts`** (fourni) — chaque opération accepte un flag `print` pour afficher sur stdout.
+Chaque opération modifie les piles. Si l'opération est **valide**, `push_swap` l'**affiche** sur `stdout` (une ligne par opération). Sinon, elle ne fait rien et **n'est pas affichée**.
 
 | Op    | Effet                                                        |
 | ----- | ------------------------------------------------------------ |
-| `sa`  | Échange les **2 premiers** éléments de `a` (au sommet)       |
+| `sa`  | Échange les **2 premiers** éléments de `a` (les 2 au sommet) |
 | `sb`  | Échange les **2 premiers** éléments de `b`                   |
 | `ss`  | `sa` + `sb` (une seule ligne `ss`)                           |
 | `pa`  | Retire le sommet de `b`, l'empile sur `a`                    |
@@ -88,54 +100,66 @@ Fichier **`src/lib/operations.ts`** (fourni) — chaque opération accepte un fl
 
 ## Parsing et gestion d'erreurs
 
-Fichier **`src/lib/parse.ts`** (fourni).
-
 | Entrée                                                                      | Comportement                       |
 | --------------------------------------------------------------------------- | ---------------------------------- |
 | Aucun argument                                                              | Pas de sortie, code `0`            |
 | Argument non entier, `≤ 0`, doublon, ou **moins de 2 / plus de 50** valeurs | `Error\n` sur **stderr**, code `1` |
 
+Exemples :
+
+```bash
+npx tsx src/push_swap.ts          # rien, exit 0
+npx tsx src/push_swap.ts 1 1      # Error, exit 1
+npx tsx src/push_swap.ts -3 2     # Error, exit 1
+npx tsx src/push_swap.ts 1 2 abc  # Error, exit 1
+npx tsx src/push_swap.ts 42       # Error (un seul entier), exit 1
+```
+
 ---
 
-## Organisation du code
+## Organisation du code (recommandée)
 
 ```
 TP/
 ├── SUJET.md
+├── checker.ts           # fourni — ne pas modifier
 ├── package.json
-├── src/
-│   ├── lib/
-│   │   ├── stack.ts         # pile typée
-│   │   ├── operations.ts    # sa, sb, … (fourni)
-│   │   └── parse.ts         # validation des arguments (fourni)
-│   ├── push_swap.ts         # main + sortStacks — **à compléter**
-│   └── checker.ts           # fourni : lit stdin, exécute les ops
-└── correction/
-    ├── sort.ts              # référence sortStacks
-    └── run_push_swap.ts
-```
-
-Fonction à compléter dans **`src/push_swap.ts`** :
-
-```typescript
-export function sortStacks(a: Stack, b: Stack): void;
+├── scripts/
+│   ├── test_checker_50.sh
+│   └── run_batch_50.sh
+└── src/                 # à créer
+    ├── stack.ts         # pile : init, push, pop, triée ?, etc.
+    ├── operations.ts    # sa, sb, … rrr
+    ├── parse.ts         # validation des arguments
+    ├── sort.ts          # stratégie de tri
+    └── push_swap.ts     # point d'entrée
 ```
 
 ---
 
-## Compilation et tests
+## Vérification
 
 ```bash
 cd TP
 npm install
 
-npm run push_swap -- 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
+# Test unitaire manuel
+npx tsx src/push_swap.ts 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
 # OK
 
-npm run push_swap:corr -- 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
-# correction de référence
-
+# 50 valeurs aléatoires (configurez PUSH_SWAP si besoin)
 npm run test:50
+
+# Comptage d'opérations (bonus)
+bash scripts/run_batch_50.sh 5
+```
+
+Variables utiles pour les scripts :
+
+```bash
+export PUSH_SWAP="npx tsx src/push_swap.ts"
+export CHECKER="npx tsx checker.ts"
+./scripts/test_checker_50.sh 3
 ```
 
 ---
@@ -143,23 +167,23 @@ npm run test:50
 ## GitHub Copilot — consignes du TP
 
 1. **Commentaires-prompts** JSDoc avant chaque bloc (`/** pb : dépile le sommet de a, empile sur b */`).
-2. Garder **`stack.ts`** et **`operations.ts`** ouverts pendant l'écriture de `sortStacks`.
+2. Garder les **types** (`stack.ts`, interfaces) ouverts pendant l'écriture des opérations.
 3. Utiliser le **Chat** pour expliquer le tri à 3 éléments, pas pour livrer une solution non comprise.
-4. **Valider** avec le checker et `npm run typecheck`.
+4. **Valider** avec le checker et `tsc --noEmit`.
 
 ---
 
 ## Rendu
 
-- Dépôt ou archive contenant `TP/` exécutable avec `npm install`.
-- Court `README` : nom, commandes de test.
+- Dépôt ou archive contenant votre `push_swap` exécutable avec `npx tsx src/push_swap.ts`.
+- Court `README` : nom, commandes de compilation et de test.
 
 ---
 
 ## Schéma
 
 ```
-     push_swap                         checker
+     push_swap (étudiant)              checker.ts (fourni)
   ┌─────────────┐                  ┌─────────────┐
   │ argv → pile │  ops sur stdout  │ argv → pile │
   │ tri → ops   │ ───────────────► │ lit stdin   │

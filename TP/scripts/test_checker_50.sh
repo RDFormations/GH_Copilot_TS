@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Lance push_swap | checker avec 50 valeurs aléatoires.
 # Usage : ./scripts/test_checker_50.sh [nombre_de_tests]
+#   PUSH_SWAP="npx tsx src/push_swap.ts" ./scripts/test_checker_50.sh
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,6 +11,8 @@ source "$SCRIPT_DIR/gen_50_args.sh"
 
 cd "$TP_DIR"
 
+PUSH_SWAP="${PUSH_SWAP:-npx tsx src/push_swap.ts}"
+CHECKER="${CHECKER:-npx tsx checker.ts}"
 RUNS="${1:-${RUNS:-1}}"
 
 if ! [[ "$RUNS" =~ ^[1-9][0-9]*$ ]]; then
@@ -18,6 +21,8 @@ if ! [[ "$RUNS" =~ ^[1-9][0-9]*$ ]]; then
 fi
 
 echo "=== push_swap | checker — $RUNS test(s) à 50 valeurs ==="
+echo "push_swap : $PUSH_SWAP"
+echo "checker   : $CHECKER"
 echo
 
 ok=0
@@ -26,9 +31,13 @@ fail=0
 for ((i = 1; i <= RUNS; i++)); do
   args="$(gen_50_args_line)"
   # shellcheck disable=SC2086
-  result="$(npx tsx correction/run_push_swap.ts $args 2>/dev/null | npx tsx src/checker.ts $args 2>/dev/null | tr -d '\r')"
+  if ! result="$($PUSH_SWAP $args 2>/dev/null | $CHECKER $args 2>/dev/null | tr -d '\r')"; then
+    echo "Test $i/$RUNS : FAIL (push_swap ou checker en erreur)"
+    fail=$((fail + 1))
+    continue
+  fi
   if [[ "$result" != "OK" ]]; then
-    echo "Test $i/$RUNS : FAIL"
+    echo "Test $i/$RUNS : FAIL ($result)"
     fail=$((fail + 1))
   else
     echo "Test $i/$RUNS : OK"

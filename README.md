@@ -31,13 +31,16 @@ npm run corr:01 # correction
 
 ## TP push_swap
 
+**Fourni aux étudiants :** `TP/SUJET.md`, `TP/checker.ts` (standalone), `TP/scripts/`.
+
+L'implémentation `push_swap` est entièrement à développer dans `TP/src/`.
+
 ```bash
 cd TP
 npm install
-npm run build
 
-npm run push_swap -- 3 1 2 | npm run checker -- 3 1 2
-# attendu : OK
+npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
+# attendu : OK (une fois push_swap implémenté)
 
 npm run test:50
 ```

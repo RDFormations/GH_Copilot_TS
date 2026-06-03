@@ -4,11 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "rootDir": "."
+    "skipLibCheck": true
   },
-  "include": ["src/**/*", "correction/**/*"]
+  "include": ["checker.ts"]
 }

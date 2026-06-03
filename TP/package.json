@@ -2,17 +2,9 @@
   "name": "gh-copilot-ts-push-swap",
   "private": true,
   "type": "module",
-  "bin": {
-    "push_swap": "./dist/push_swap.js",
-    "checker": "./dist/checker.js"
-  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "push_swap": "tsx src/push_swap.ts",
-    "checker": "tsx src/checker.ts",
-    "push_swap:corr": "tsx correction/run_push_swap.ts",
-    "test:50": "bash scripts/test_checker_50.sh",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "checker": "tsx checker.ts",
+    "test:50": "bash scripts/test_checker_50.sh"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
