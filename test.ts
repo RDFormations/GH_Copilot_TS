@@ -1,6 +1,16 @@
-// Fonction qui affiche Hello World
-function greet(name: string): string {
-  return `Hello, ${name}!`;
+interface Employee {
+	name: string;
+	age: number;
+	salary: number;
 }
 
-console.log(greet("World"));
+function calculateAverageSalary(employees: Employee[]): number {
+	if (employees.length === 0) {
+		return 0;
+	}
+	const totalSalary = employees.reduce(
+		(sum, employee) => sum + employee.salary,
+		0,
+	);
+	return totalSalary / employees.length;
+}

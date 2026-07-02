@@ -9,7 +9,7 @@
 	},
 	"github.copilot.chat.commitMessageGeneration.instructions": [
 		{
-			"text": "Generate commit messages using gitmoji"
+			"text": "Generate commit messages using comitizen"
 		}
 	],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
