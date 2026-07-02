@@ -29,16 +29,6 @@ export function employeeSerialize(emp: Employee): string {
 /** Parse a "name;age;salary" line and return an Employee, or null if invalid. */
 export function employeeDeserialize(line: string): Employee | null {
 	// Comment-prompt: split on ';', validate 3 fields, parse age (int) and salary (float)
-	const parts = line.split(";");
-	if (parts.length !== 3) return null;
-
-	const [name, ageStr, salaryStr] = parts;
-	const age = parseInt(ageStr, 10);
-	const salary = parseFloat(salaryStr);
-
-	if (isNaN(age) || isNaN(salary)) return null;
-
-	return { name, age, salary };
 }
 
 const dataPath = join(tmpdir(), "gh-copilot-ts-employees.dat");

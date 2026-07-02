@@ -6,9 +6,7 @@ export interface Employee {
 	salary: number;
 }
 
-export function parseCsvLine(line: string): string[] {
-	return line.split(",").map((token) => token.trim());
-}
+export function parseCsvLine(line: string): string[] {}
 
 export function tokenToEmployee(tokens: string[]): Employee {
 	return {
@@ -47,9 +45,7 @@ for (const line of content.trim().split("\n")) {
 	employees = insertEmployee(employees, tokenToEmployee(tokens));
 }
 
-console.log(
-	`=== ${employees.length} employees loaded from ${filename} ===\n`,
-);
+console.log(`=== ${employees.length} employees loaded from ${filename} ===\n`);
 employees.forEach((emp, i) => {
 	console.log(
 		`  [${i}] ${emp.name.padEnd(20)} | age: ${String(emp.age).padStart(2)} | salary: ${emp.salary.toFixed(2)}`,
