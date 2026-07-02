@@ -1,40 +1,40 @@
-# TP — mini_push_swap (TypeScript)
+# Lab — mini_push_swap (TypeScript)
 
-## Contexte
+## Context
 
-Le **push_swap** est un exercice classique de manipulation de structures de données : trier des entiers en n'utilisant que **deux piles** (`a` et `b`) et un petit ensemble d'**opérations** (`sa`, `pb`, `ra`, etc.). On ne trie pas directement un tableau : chaque déplacement passe par les piles.
+**push_swap** is a classic data structure exercise: sort integers using only **two stacks** (`a` and `b`) and a small set of **operations** (`sa`, `pb`, `ra`, etc.). You do not sort an array directly — every move goes through the stacks.
 
-Ce TP en propose une **version réduite**, adaptée à un cours **TypeScript** et à l'usage de GitHub Copilot.
-
----
-
-## Fichiers fournis
-
-| Fichier | Rôle |
-| ------- | ---- |
-| `SUJET.md` | Énoncé (ce document) |
-| `checker.ts` | Vérificateur **standalone** — lit les opérations sur stdin |
-| `scripts/` | Scripts de test (`test_checker_50.sh`, `run_batch_50.sh`) |
-
-**Tout le reste est à développer** : `push_swap`, piles, opérations, parsing des arguments.
+This lab offers a **reduced version**, adapted for a **TypeScript** course and GitHub Copilot usage.
 
 ---
 
-## Objectif
+## Provided files
 
-Écrire un programme **`push_swap`** qui :
+| File | Role |
+| ---- | ---- |
+| `SUJET.md` | Assignment (this document) |
+| `checker.ts` | **Standalone** checker — reads operations from stdin |
+| `scripts/` | Test scripts (`test_checker_50.sh`, `run_batch_50.sh`) |
 
-1. Reçoit entre **2 et 50** entiers **strictement positifs**, tous **distincts**, en arguments.
-2. Affiche sur la sortie standard une **suite d'opérations** (une par ligne).
-3. Applique ces opérations sur deux piles pour que **`a` soit triée** (convention du checker fourni).
+**Everything else must be developed**: `push_swap`, stacks, operations, argument parsing.
 
-### Exemple
+---
+
+## Objective
+
+Write a **`push_swap`** program that:
+
+1. Receives between **2 and 50** **strictly positive**, **distinct** integers as arguments.
+2. Prints a **sequence of operations** on standard output (one per line).
+3. Applies these operations on two stacks so that **`a` is sorted** (per the provided checker convention).
+
+### Example
 
 ```bash
 npx tsx src/push_swap.ts 3 1 2
 ```
 
-Sortie possible :
+Possible output:
 
 ```
 ra
@@ -44,117 +44,117 @@ pa
 pa
 ```
 
-Vérification avec le checker fourni :
+Verification with the provided checker:
 
 ```bash
 npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
-# attendu : OK
+# expected: OK
 ```
 
 ---
 
-## Périmètre du TP
+## Lab scope
 
-| Version « complète » classique      | Ce TP                                                  |
-| ----------------------------------- | ------------------------------------------------------ |
-| Centaines de valeurs                | **2 à 50** valeurs                                     |
-| Optimisation du nombre d'opérations | **Tri correct** obligatoire ; score d'ops en **bonus** |
-| Checker à écrire                    | **Checker fourni** (`checker.ts`)                      |
-| Algorithmes avancés                 | Piles, opérations et **stratégie de tri à concevoir**  |
+| Classic "full" version | This lab |
+| ---------------------- | -------- |
+| Hundreds of values | **2 to 50** values |
+| Operation count optimization | **Correct sort** required; op score is a **bonus** |
+| Checker to write | **Checker provided** (`checker.ts`) |
+| Advanced algorithms | Stacks, operations, and **sorting strategy to design** |
 
 ---
 
-## Modèle des piles
+## Stack model
 
-- **`a`** : contient tous les nombres au départ. Le **premier argument** est en **bas**, le **dernier** au **sommet**.
-- **`b`** : vide au départ.
+- **`a`**: holds all numbers at the start. The **first argument** is at the **bottom**, the **last** at the **top**.
+- **`b`**: empty at the start.
 
 ```
 npx tsx src/push_swap.ts 2 1 3
 
-Pile a (bas → haut) :  2  1  3     ← sommet = 3
-Pile b                : (vide)
+Stack a (bottom → top):  2  1  3     ← top = 3
+Stack b                  : (empty)
 ```
 
-Représentation au choix : **tableau**, **liste chaînée**, ou structure custom — tant que les opérations respectent la sémantique ci-dessous.
+Representation of your choice: **array**, **linked list**, or custom structure — as long as operations respect the semantics below.
 
 ---
 
-## Opérations à implémenter
+## Operations to implement
 
-Chaque opération modifie les piles. Si l'opération est **valide**, `push_swap` l'**affiche** sur `stdout` (une ligne par opération). Sinon, elle ne fait rien et **n'est pas affichée**.
+Each operation modifies the stacks. If the operation is **valid**, `push_swap` **prints** it on `stdout` (one line per operation). Otherwise, it does nothing and **is not printed**.
 
-| Op    | Effet                                                        |
-| ----- | ------------------------------------------------------------ |
-| `sa`  | Échange les **2 premiers** éléments de `a` (les 2 au sommet) |
-| `sb`  | Échange les **2 premiers** éléments de `b`                   |
-| `ss`  | `sa` + `sb` (une seule ligne `ss`)                           |
-| `pa`  | Retire le sommet de `b`, l'empile sur `a`                    |
-| `pb`  | Retire le sommet de `a`, l'empile sur `b`                    |
-| `ra`  | Sommet de `a` envoyé en **bas** de `a`                       |
-| `rb`  | Idem sur `b`                                                 |
-| `rr`  | `ra` + `rb` (une seule ligne `rr`)                           |
-| `rra` | Élément du **bas** de `a` remonté au sommet                  |
-| `rrb` | Idem sur `b`                                                 |
-| `rrr` | `rra` + `rrb` (une seule ligne `rrr`)                        |
+| Op    | Effect |
+| ----- | ------ |
+| `sa`  | Swap the **top 2** elements of `a` |
+| `sb`  | Swap the **top 2** elements of `b` |
+| `ss`  | `sa` + `sb` (single `ss` line) |
+| `pa`  | Pop the top of `b`, push onto `a` |
+| `pb`  | Pop the top of `a`, push onto `b` |
+| `ra`  | Move top of `a` to the **bottom** of `a` |
+| `rb`  | Same on `b` |
+| `rr`  | `ra` + `rb` (single `rr` line) |
+| `rra` | Move **bottom** element of `a` to the top |
+| `rrb` | Same on `b` |
+| `rrr` | `rra` + `rrb` (single `rrr` line) |
 
-## Parsing et gestion d'erreurs
+## Parsing and error handling
 
-| Entrée                                                                      | Comportement                       |
-| --------------------------------------------------------------------------- | ---------------------------------- |
-| Aucun argument                                                              | Pas de sortie, code `0`            |
-| Argument non entier, `≤ 0`, doublon, ou **moins de 2 / plus de 50** valeurs | `Error\n` sur **stderr**, code `1` |
+| Input | Behavior |
+| ----- | -------- |
+| No arguments | No output, exit code `0` |
+| Non-integer argument, `≤ 0`, duplicate, or **fewer than 2 / more than 50** values | `Error\n` on **stderr**, exit code `1` |
 
-Exemples :
+Examples:
 
 ```bash
-npx tsx src/push_swap.ts          # rien, exit 0
+npx tsx src/push_swap.ts          # nothing, exit 0
 npx tsx src/push_swap.ts 1 1      # Error, exit 1
 npx tsx src/push_swap.ts -3 2     # Error, exit 1
 npx tsx src/push_swap.ts 1 2 abc  # Error, exit 1
-npx tsx src/push_swap.ts 42       # Error (un seul entier), exit 1
+npx tsx src/push_swap.ts 42       # Error (single integer), exit 1
 ```
 
 ---
 
-## Organisation du code (recommandée)
+## Code organization (recommended)
 
 ```
 TP/
 ├── SUJET.md
-├── checker.ts           # fourni — ne pas modifier
+├── checker.ts           # provided — do not modify
 ├── package.json
 ├── scripts/
 │   ├── test_checker_50.sh
 │   └── run_batch_50.sh
-└── src/                 # à créer
-    ├── stack.ts         # pile : init, push, pop, triée ?, etc.
+└── src/                 # to create
+    ├── stack.ts         # stack: init, push, pop, isSorted?, etc.
     ├── operations.ts    # sa, sb, … rrr
-    ├── parse.ts         # validation des arguments
-    ├── sort.ts          # stratégie de tri
-    └── push_swap.ts     # point d'entrée
+    ├── parse.ts         # argument validation
+    ├── sort.ts          # sorting strategy
+    └── push_swap.ts     # entry point
 ```
 
 ---
 
-## Vérification
+## Verification
 
 ```bash
 cd TP
 npm install
 
-# Test unitaire manuel
+# Manual unit test
 npx tsx src/push_swap.ts 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
 # OK
 
-# 50 valeurs aléatoires (configurez PUSH_SWAP si besoin)
+# 50 random values (configure PUSH_SWAP if needed)
 npm run test:50
 
-# Comptage d'opérations (bonus)
+# Operation count (bonus)
 bash scripts/run_batch_50.sh 5
 ```
 
-Variables utiles pour les scripts :
+Useful variables for scripts:
 
 ```bash
 export PUSH_SWAP="npx tsx src/push_swap.ts"
@@ -164,30 +164,30 @@ export CHECKER="npx tsx checker.ts"
 
 ---
 
-## GitHub Copilot — consignes du TP
+## GitHub Copilot — lab guidelines
 
-1. **Commentaires-prompts** JSDoc avant chaque bloc (`/** pb : dépile le sommet de a, empile sur b */`).
-2. Garder les **types** (`stack.ts`, interfaces) ouverts pendant l'écriture des opérations.
-3. Utiliser le **Chat** pour expliquer le tri à 3 éléments, pas pour livrer une solution non comprise.
-4. **Valider** avec le checker et `tsc --noEmit`.
-
----
-
-## Rendu
-
-- Dépôt ou archive contenant votre `push_swap` exécutable avec `npx tsx src/push_swap.ts`.
-- Court `README` : nom, commandes de compilation et de test.
+1. **Comment-prompts** with JSDoc before each block (`/** pb: pop top of a, push onto b */`).
+2. Keep **types** (`stack.ts`, interfaces) open while writing operations.
+3. Use **Chat** to explain sorting with 3 elements — not to deliver an uncomprehended solution.
+4. **Validate** with the checker and `tsc --noEmit`.
 
 ---
 
-## Schéma
+## Deliverable
+
+- Repository or archive containing your `push_swap` runnable with `npx tsx src/push_swap.ts`.
+- Short `README`: name, build and test commands.
+
+---
+
+## Diagram
 
 ```
-     push_swap (étudiant)              checker.ts (fourni)
+     push_swap (student)              checker.ts (provided)
   ┌─────────────┐                  ┌─────────────┐
-  │ argv → pile │  ops sur stdout  │ argv → pile │
-  │ tri → ops   │ ───────────────► │ lit stdin   │
-  └─────────────┘                  │ exécute ops │
-                                   │ vérifie tri │
+  │ argv → stack│  ops on stdout   │ argv → stack│
+  │ sort → ops  │ ───────────────► │ read stdin  │
+  └─────────────┘                  │ run ops     │
+                                   │ check sort  │
                                    └─────────────┘
 ```

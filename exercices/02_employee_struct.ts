@@ -26,12 +26,19 @@ export function employeeSerialize(emp: Employee): string {
 	return `${emp.name};${emp.age};${emp.salary.toFixed(2)}`;
 }
 
-/** Parse une ligne "name;age;salary" et retourne un Employee ou null si invalide. */
+/** Parse a "name;age;salary" line and return an Employee, or null if invalid. */
 export function employeeDeserialize(line: string): Employee | null {
-	// TODO: Implement avec Copilot
-	// Commentaire-prompt : split sur ';', valider 3 champs, parser age (int) et salary (float)
-	void line;
-	return null;
+	// Comment-prompt: split on ';', validate 3 fields, parse age (int) and salary (float)
+	const parts = line.split(";");
+	if (parts.length !== 3) return null;
+
+	const [name, ageStr, salaryStr] = parts;
+	const age = parseInt(ageStr, 10);
+	const salary = parseFloat(salaryStr);
+
+	if (isNaN(age) || isNaN(salary)) return null;
+
+	return { name, age, salary };
 }
 
 const dataPath = join(tmpdir(), "gh-copilot-ts-employees.dat");
@@ -42,19 +49,19 @@ const employees = [
 	employeeCreate("Charlie Noir", 45, 62000.0),
 ];
 
-console.log("=== Employes crees ===");
+console.log("=== Created employees ===");
 employees.forEach(employeePrint);
 
-console.log("\n=== Serialisation dans fichier ===");
+console.log("\n=== Serialization to file ===");
 mkdirSync(tmpdir(), { recursive: true });
 writeFileSync(
 	dataPath,
 	employees.map(employeeSerialize).join("\n") + "\n",
 	"utf-8",
 );
-console.log(`3 employes ecrits dans ${dataPath}`);
+console.log(`3 employees written to ${dataPath}`);
 
-console.log("\n=== Deserialisation depuis fichier ===");
+console.log("\n=== Deserialization from file ===");
 const lines = readFileSync(dataPath, "utf-8").trim().split("\n");
 for (const line of lines) {
 	const loaded = employeeDeserialize(line);

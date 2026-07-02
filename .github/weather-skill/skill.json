@@ -1,0 +1,13 @@
+{
+	"id": "weather-skill",
+	"title": "City weather",
+	"description": "Fetches current weather for a city via Open-Meteo.",
+	"scope": "workspace",
+	"language": "python",
+	"entrypoint": "scripts/get_weather.py",
+	"triggers": [
+		"Give me the weather in",
+		"weather"
+	],
+	"callable": true
+}

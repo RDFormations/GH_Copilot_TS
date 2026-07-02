@@ -47,10 +47,10 @@ for (const line of content.trim().split("\n")) {
   employees = insertEmployee(employees, tokenToEmployee(tokens));
 }
 
-console.log(`=== ${employees.length} employes charges depuis ${filename} ===\n`);
+console.log(`=== ${employees.length} employees loaded from ${filename} ===\n`);
 employees.forEach((emp, i) => {
   console.log(
-    `  [${i}] ${emp.name.padEnd(20)} | age: ${String(emp.age).padStart(2)} | salaire: ${emp.salary.toFixed(2)}`,
+    `  [${i}] ${emp.name.padEnd(20)} | age: ${String(emp.age).padStart(2)} | salary: ${emp.salary.toFixed(2)}`,
   );
 });
 

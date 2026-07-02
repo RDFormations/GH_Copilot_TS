@@ -41,15 +41,15 @@ const employees = [
   employeeCreate("Charlie Noir", 45, 62000.0),
 ];
 
-console.log("=== Employes crees ===");
+console.log("=== Created employees ===");
 employees.forEach(employeePrint);
 
-console.log("\n=== Serialisation dans fichier ===");
+console.log("\n=== Serialization to file ===");
 mkdirSync(tmpdir(), { recursive: true });
 writeFileSync(dataPath, employees.map(employeeSerialize).join("\n") + "\n", "utf-8");
-console.log(`3 employes ecrits dans ${dataPath}`);
+console.log(`3 employees written to ${dataPath}`);
 
-console.log("\n=== Deserialisation depuis fichier ===");
+console.log("\n=== Deserialization from file ===");
 const lines = readFileSync(dataPath, "utf-8").trim().split("\n");
 for (const line of lines) {
   const loaded = employeeDeserialize(line);
