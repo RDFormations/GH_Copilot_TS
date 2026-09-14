@@ -2,7 +2,7 @@
 
 > **Context** — You implement utility functions in **TypeScript**. Vague comments produce generic code.
 
-## Exercice — Algorithm comment-prompts
+## Exercise — Algorithm comment-prompts
 
 **Topics :** sections 2.5–2.6 (What/How/Constraints, iteration).
 
@@ -40,4 +40,4 @@ export function binarySearch(values: number[], target: number): number {
 
 **Documentation :** [Best practices](https://docs.github.com/copilot/get-started/best-practices-for-using-github-copilot)
 
-> **Solution** : [Accéder à la correction](../correction/en/correction-02-completions-inline.md)
+> **Solution** : [View solution](../correction/en/correction-02-completions-inline.md)

@@ -4,17 +4,18 @@ https://github.com/RDFormations/GH_Copilot_TS
 
 # GH Copilot — TypeScript Lab
 
-GitHub Copilot training adapted for **TypeScript**: course material, guided exercises (FR/EN), and a mini push_swap lab.
+GitHub Copilot training adapted for **TypeScript**: course material (FR + EN), guided exercises, and a mini push_swap lab.
 
 ## Contents
 
 | Folder | Description |
 | ------ | ----------- |
-| `Cours.md` / `Cours.pdf` | Training material (6 modules, EN) |
-| `exercices/fr/` | Exercise sheets (FR) + code stubs `.ts` |
-| `exercices/en/` | Exercise sheets (EN) + same code stubs |
-| `correction/fr/` | Solutions (FR) + corrected code |
-| `correction/en/` | Solutions (EN) + corrected code |
+| `Cours.md` / `Cours.pdf` | Course material FR (6 modules) |
+| `CoursENG.md` / `CoursENG.pdf` | Course material EN (6 modules) |
+| `exercices/fr/` | Exercise sheets FR + code stubs `.ts` |
+| `exercices/en/` | Exercise sheets EN + same code stubs |
+| `correction/fr/` | Solutions FR + corrected code |
+| `correction/en/` | Solutions EN + corrected code |
 | `TP/fr/SUJET.md` | push_swap lab assignment (French) |
 | `TP/en/SUJET.md` | push_swap lab assignment (English) |
 

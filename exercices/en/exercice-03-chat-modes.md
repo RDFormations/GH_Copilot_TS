@@ -2,24 +2,24 @@
 
 > **Context** — A date calculation module contains a bug. Tests fail: deadline is sometimes before createdAt.
 
-## Exercice — Ask then Edit on an SLA bug
+## Exercise — Ask then Edit on an SLA bug
 
 **Prerequisites :** module 3 read; Copilot Chat ready.
 
 ### Instructions
 
-1. Create `src/utils/dateUtils.ts` avec l échantillon buggy :
+1. Create `src/utils/dateUtils.ts` with the buggy sample:
 
 ```ts
 export type TicketPriority = "low" | "normal" | "critical";
 
 const SLA_HOURS: Record<TicketPriority, number> = { low: 72, normal: 48, critical: 4 };
 
-export function addHoursToDate(createdAt: Date, priority: TicketPriority): Date {
- const hours = SLA_HOURS[priority];
- const deadline = new Date(createdAt);
- deadline.setHours(deadline.getHours() - hours); // BUG
- return deadline;
+export function calculateSlaDeadline(createdAt: Date, priority: TicketPriority): Date {
+  const hours = SLA_HOURS[priority];
+  const deadline = new Date(createdAt);
+  deadline.setHours(deadline.getHours() - hours); // BUG
+  return deadline;
 }
 ```
 
@@ -31,4 +31,4 @@ export function addHoursToDate(createdAt: Date, priority: TicketPriority): Date 
 
 **Success criteria :** correct Ask diagnosis; Edit fix with addition; manual test OK.
 
-> **Solution** : [Accéder à la correction](../correction/en/correction-03-chat-modes.md)
+> **Solution** : [View solution](../correction/en/correction-03-chat-modes.md)
