@@ -36,12 +36,12 @@ Chaque module comprend un **lesson**, des **exercises** et une **solution**.
 
 ```mermaid
 flowchart LR
-    A[Install] --> B[Inline]
-    B --> C[Chat]
-    C --> D[Instructions]
-    D --> S[Skills]
-    S --> E[Agent]
-    E --> F[Review]
+ A[Install] --> B[Inline]
+ B --> C[Chat]
+ C --> D[Instructions]
+ D --> S[Skills]
+ S --> E[Agent]
+ E --> F[Review]
 ```
 
 **Next step :** [Module 1 — Introduction](/formations/en-github-copilot-typescript/module-01-introduction)
@@ -87,12 +87,12 @@ GitHub Copilot est un assistant de programmation basé sur l'intelligence artifi
 
 GitHub Copilot propose plusieurs **niveaux d'autonomie**. La formation s'articule autour du mode **Agent** et de sa personnalisation (**Instructions**, **Skills**), tout en conservant les **completions inline** pour l'écriture au fil de l'eau.
 
-| Version              | Niveau d'autonomie | Description                                    | Usage principal                         |
+| Version | Niveau d'autonomie | Description | Usage principal |
 | -------------------- | ------------------ | ---------------------------------------------- | --------------------------------------- |
-| **Copilot (inline)** | Faible             | Suggestions de code directement dans l'éditeur | Complétion au quotidien, boilerplate    |
-| **Copilot Chat**     | Moyen              | Conversation (Ask, Edit, Plan)                 | Questions, explications, refactoring    |
-| **Mode Agent**       | Élevé              | Planifie, modifie plusieurs fichiers, exécute  | Tâches multi-fichiers, debug, migration |
-| **Copilot CLI**      | Élevé              | Agent en ligne de commande                     | Shell, tests, CI, scripts               |
+| **Copilot (inline)** | Faible | Suggestions de code directement dans l'éditeur | Complétion au quotidien, boilerplate |
+| **Copilot Chat** | Moyen | Conversation (Ask, Edit, Plan) | Questions, explications, refactoring |
+| **Mode Agent** | Élevé | Planifie, modifie plusieurs fichiers, exécute | Tâches multi-fichiers, debug, migration |
+| **Copilot CLI** | Élevé | Agent en ligne de commande | Shell, tests, CI, scripts |
 
 **Copilot inline** reste le point d'entrée : dès qu'on tape du code, des suggestions apparaissent en gris (`Tab` pour accepter). Voir le **Module 2**.
 
@@ -101,8 +101,6 @@ GitHub Copilot propose plusieurs **niveaux d'autonomie**. La formation s'articul
 **Instructions, Skills et mode Agent** : voir les **Modules 4 et 5**.
 
 **Copilot CLI** (`gh copilot`) reprend la logique agentique hors de l'éditeur — utile pour lancer les tests (`npm test`), typer (`tsc --noEmit`) ou formater le code.
-
-> **Thread :** maîtriser les completions inline, puis le Chat, puis personnaliser le projet avec Instructions et Skills pour le mode Agent.
 
 ## 1.3 Installation and configuration
 
@@ -167,15 +165,15 @@ Les **completions inline** sont le mode le plus utilisé au quotidien. Une fois 
 
 ## 2.1 Essential keyboard shortcuts
 
-| Action                           | Raccourci (Windows/Linux) | Raccourci (Mac) |
+| Action | Raccourci (Windows/Linux) | Raccourci (Mac) |
 | -------------------------------- | ------------------------- | --------------- |
-| Accepter la suggestion           | `Tab`                     | `Tab`           |
-| Rejeter la suggestion            | `Échap`                   | `Échap`         |
-| Suggestion suivante              | `Alt + ]`                 | `Option + ]`    |
-| Suggestion précédente            | `Alt + [`                 | `Option + [`    |
-| Accepter le mot suivant          | `Ctrl + →`                | `Cmd + →`       |
-| Déclencher manuellement          | `Alt + \`                 | `Option + \`    |
-| Ouvrir le panneau de suggestions | `Ctrl + Enter`            | `Ctrl + Enter`  |
+| Accepter la suggestion | `Tab` | `Tab` |
+| Rejeter la suggestion | `Échap` | `Échap` |
+| Suggestion suivante | `Alt + ]` | `Option + ]` |
+| Suggestion précédente | `Alt + [` | `Option + [` |
+| Accepter le mot suivant | `Ctrl + →` | `Cmd + →` |
+| Déclencher manuellement | `Alt + \` | `Option + \` |
+| Ouvrir le panneau de suggestions | `Ctrl + Enter` | `Ctrl + Enter` |
 
 Le panneau de suggestions (`Ctrl + Enter`) ouvre une fenêtre avec jusqu'à 10 suggestions alternatives. Utile quand la première suggestion ne convient pas.
 
@@ -202,9 +200,9 @@ Le commentaire guide Copilot sur l'algorithme attendu.
 
 ```typescript
 interface Employee {
-  name: string;
-  age: number;
-  salary: number;
+ name: string;
+ age: number;
+ salary: number;
 }
 ```
 
@@ -230,9 +228,9 @@ Si vous avez `utils.types.ts` ouvert avec des interfaces, Copilot les utilisera 
 **Les imports influencent les suggestions :**
 
 ```typescript
-import { Router } from "express";     // Copilot suggère des routes REST
+import { Router } from "express"; // Copilot suggère des routes REST
 import React, { useState } from "react"; // Copilot suggère des composants/hooks
-import { z } from "zod";              // Copilot suggère des schémas de validation
+import { z } from "zod"; // Copilot suggère des schémas de validation
 ```
 
 **Le code environnant guide la génération :**
@@ -242,7 +240,7 @@ Si les fonctions précédentes utilisent un style particulier (gestion d'erreurs
 // Si votre code existant fait ceci :
 const result = await fetch(url);
 if (!result.ok) {
-  throw new ApiError(result.status, await result.text());
+ throw new ApiError(result.status, await result.text());
 }
 
 // Copilot reproduira ce pattern de gestion d'erreur HTTP
@@ -260,12 +258,12 @@ La **fenêtre de contexte** (ou _context window_) est la quantité maximale de t
 
 **Pourquoi c'est important :**
 
-| Conséquence                       | Explication |
+| Conséquence | Explication |
 | --------------------------------- | ----------- |
-| **Perte de contexte**             | Un gros fichier + historique chat peuvent faire « oublier » le début. |
-| **Suggestions moins cohérentes**  | Si vos conventions ne tiennent plus dans la fenêtre, Copilot revient à des patterns génériques. |
+| **Perte de contexte** | Un gros fichier + historique chat peuvent faire « oublier » le début. |
+| **Suggestions moins cohérentes** | Si vos conventions ne tiennent plus dans la fenêtre, Copilot revient à des patterns génériques. |
 | **Réponses incomplètes en Agent** | Sur un gros dépôt, l'agent doit cibler les bons fichiers. |
-| **Coût de qualité du prompt**     | Un contexte pertinent vaut mieux qu'un contexte volumineux. |
+| **Coût de qualité du prompt** | Un contexte pertinent vaut mieux qu'un contexte volumineux. |
 
 **Best practices pour optimiser la fenêtre :**
 
@@ -341,8 +339,8 @@ Un prompt efficace suit la structure **Quoi / Comment / Contraintes** :
  * QUOI : Recherche un élément dans un tableau trié
  * COMMENT : Recherche dichotomique (binary search)
  * CONTRAINTES :
- *   - Tableau trié croissant
- *   - Retourne l'index ou -1
+ * - Tableau trié croissant
+ * - Retourne l'index ou -1
  */
 function binarySearch(arr: readonly number[], target: number): number
 ```
@@ -354,8 +352,8 @@ Autre exemple :
  * QUOI : Clone profond d'un arbre binaire typé
  * COMMENT : Parcours récursif avec spread immuable
  * CONTRAINTES :
- *   - Retourne null si la racine est null
- *   - Préserver le typage générique TreeNode<T>
+ * - Retourne null si la racine est null
+ * - Préserver le typage générique TreeNode<T>
  */
 function deepCopyTree<T>(root: TreeNode<T> | null): TreeNode<T> | null
 ```
@@ -402,12 +400,12 @@ After [inline completions](/formations/en-github-copilot-typescript/module-02-co
 
 Copilot Chat propose plusieurs **modes** selon le niveau d'autonomie souhaité. Ils partagent les **Instructions** du projet ; seuls **Agent** et partiellement **Ask** exploitent les **Skills** (voir Module 4).
 
-| Mode       | Autonomie | Comportement                                      | Exemple en TypeScript                          |
+| Mode | Autonomie | Comportement | Exemple en TypeScript |
 | ---------- | --------- | ------------------------------------------------- | ------------------------------------------------- |
-| **Ask**    | Faible    | Répond, explique, ne modifie pas les fichiers     | « Explique ce hook useEffect et ses dépendances »           |
-| **Edit**   | Moyenne   | Modifie le code sélectionné ou le fichier actif | « Ajoute le typage strict sur ce paramètre any »     |
-| **Plan**   | Moyenne   | Produit un plan détaillé avant d'agir             | « Plan pour migrer ce module CommonJS vers ESM »  |
-| **Agent**  | Élevée    | Planifie, édite, exécute, itère                  | « Corrige toutes les erreurs ESLint sur src/ »    |
+| **Ask** | Faible | Répond, explique, ne modifie pas les fichiers | « Explique ce hook useEffect et ses dépendances » |
+| **Edit** | Moyenne | Modifie le code sélectionné ou le fichier actif | « Ajoute le typage strict sur ce paramètre any » |
+| **Plan** | Moyenne | Produit un plan détaillé avant d'agir | « Plan pour migrer ce module CommonJS vers ESM » |
+| **Agent** | Élevée | Planifie, édite, exécute, itère | « Corrige toutes les erreurs ESLint sur src/ » |
 
 **Ask** — comprendre du code sans modification :
 
@@ -446,14 +444,14 @@ Sélectionner un bloc de code complexe puis demander dans le chat :
 
 ## 3.3 Commandes slash
 
-| Commande   | Action                                              |
+| Commande | Action |
 | ---------- | --------------------------------------------------- |
-| `/explain` | Explique le code sélectionné                        |
-| `/fix`     | Propose une correction pour le code sélectionné     |
-| `/tests`   | Génère des tests pour le code sélectionné           |
-| `/doc`     | Génère la documentation (JSDoc / TSDoc) |
-| `/new`     | Crée un nouveau fichier/projet                      |
-| `/clear`   | Efface l'historique du chat                         |
+| `/explain` | Explique le code sélectionné |
+| `/fix` | Propose une correction pour le code sélectionné |
+| `/tests` | Génère des tests pour le code sélectionné |
+| `/doc` | Génère la documentation (JSDoc / TSDoc) |
+| `/new` | Crée un nouveau fichier/projet |
+| `/clear` | Efface l'historique du chat |
 
 **Exemple avec `/doc` :**
 
@@ -485,11 +483,11 @@ L'**indexation sémantique** permet à Copilot de **comprendre le sens** du code
 - Une question du type « Où est gérée la validation ? » ou `@workspace trouve les handlers dupliqués` s'appuie sur cette index.
 - Les résultats pertinents sont injectés dans la fenêtre de contexte.
 
-| Approche                          | Limite |
+| Approche | Limite |
 | --------------------------------- | ------ |
 | Fichiers ouverts + ligne courante | Ne couvre que ce que vous avez sous les yeux |
-| Recherche par nom de symbole      | Rate les implémentations sous un autre nom |
-| **Index sémantique**              | Retrouve du code par **intention** (« validation Zod », « middleware auth », « gestion d'erreur API ») |
+| Recherche par nom de symbole | Rate les implémentations sous un autre nom |
+| **Index sémantique** | Retrouve du code par **intention** (« validation Zod », « middleware auth », « gestion d'erreur API ») |
 
 **Best practices :**
 
@@ -610,9 +608,9 @@ File at the repository root (`.github/` folder). Copilot injects it in **every**
 ```
 .github/skills/
 └── lint-and-check/
-    ├── SKILL.md
-    ├── scripts/
-    └── references/
+ ├── SKILL.md
+ ├── scripts/
+ └── references/
 ```
 
 **Example `SKILL.md`:**
@@ -894,12 +892,12 @@ Copilot connaît les implémentations standards et le boilerplate (React, Expres
 ```typescript
 // Demander : "Génère les tests Vitest pour binarySearch"
 describe("binarySearch", () => {
-  it("finds existing element", () => {
-    expect(binarySearch([1, 3, 5, 7, 9], 7)).toBe(3);
-  });
-  it("returns -1 when not found", () => {
-    expect(binarySearch([1, 3, 5, 7, 9], 4)).toBe(-1);
-  });
+ it("finds existing element", () => {
+ expect(binarySearch([1, 3, 5, 7, 9], 7)).toBe(3);
+ });
+ it("returns -1 when not found", () => {
+ expect(binarySearch([1, 3, 5, 7, 9], 4)).toBe(-1);
+ });
 });
 ```
 

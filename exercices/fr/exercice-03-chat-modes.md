@@ -15,11 +15,11 @@ export type TicketPriority = "low" | "normal" | "critical";
 
 const SLA_HOURS: Record<TicketPriority, number> = { low: 72, normal: 48, critical: 4 };
 
-export function calculateSlaDeadline(createdAt: Date, priority: TicketPriority): Date {
-  const hours = SLA_HOURS[priority];
-  const deadline = new Date(createdAt);
-  deadline.setHours(deadline.getHours() - hours); // BUG
-  return deadline;
+export function addHoursToDate(createdAt: Date, priority: TicketPriority): Date {
+ const hours = SLA_HOURS[priority];
+ const deadline = new Date(createdAt);
+ deadline.setHours(deadline.getHours() - hours); // BUG
+ return deadline;
 }
 ```
 

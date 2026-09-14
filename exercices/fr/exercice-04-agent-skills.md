@@ -12,11 +12,11 @@
 
 1. Créez `.github/copilot-instructions.md` à la racine.
 2. Documentez (≤ 40 lignes) :
-   - stack **TypeScript** (TypeScript strict, ESLint, Vitest/Jest)
-   - structure du dépôt (src/, tests/)
-   - 3 conventions de nommage ou style
-   - 2 règles de sécurité (secrets, validation entrées)
-   - framework et emplacement des tests
+ - stack **TypeScript** (TypeScript strict, ESLint, Vitest/Jest)
+ - structure du dépôt (src/, tests/)
+ - 3 conventions de nommage ou style
+ - 2 règles de sécurité (secrets, validation entrées)
+ - framework et emplacement des tests
 3. Testez en Ask : « Quelles conventions pour ajouter un nouveau module utilitaire ? »
 4. **Bonus** — créez `.github/skills/lint-and-check/SKILL.md` (name + description YAML).
 
