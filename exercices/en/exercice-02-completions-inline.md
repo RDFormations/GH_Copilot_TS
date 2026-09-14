@@ -1,41 +1,43 @@
-# Exercices — Completions inline et contexte
+# Exercices — Inline completions and context
 
-> **Context** — Vous implémentez des fonctions utilitaires en **TypeScript**. Des commentaires trop vagues produisent du code générique.
+> **Context** — You implement utility functions in **TypeScript**. Vague comments produce generic code.
 
-## Exercice — Commentaires-prompts algorithmiques
+## Exercice — Algorithm comment-prompts
 
-**Topics :** sections 2.5–2.6 (Quoi/Comment/Contraintes, itération).
+**Topics :** sections 2.5–2.6 (What/How/Constraints, iteration).
 
 ### Instructions
 
-1. Créez `src/utils/algorithms.ts`.
-2. **Stub A** — commentaire vague `// trier`, déclenchez une complétion (`Alt + \`), notez pourquoi la suggestion est insuffisante :
+1. Create `src/utils/sort.ts`.
+2. **Stub A** — copy the vague stub, trigger completion (`Alt + \\`), note why the suggestion is insufficient:
 
-```typescript
-// trier
-function sortArray(arr: number[]): number[]
+```ts
+// trier un tableau
+export function insertionSort(values: number[]): number[] {
 ```
 
-3. Remplacez par un commentaire structuré Quoi/Comment/Contraintes :
+3. Replace with structured What/How/Constraints (insertion sort, immutable copy):
 
-```typescript
+```ts
 /**
- * QUOI : Tri par insertion sur number[]
+ * QUOI : Tri par insertion sur tableau de nombres
  * COMMENT : parcours O(n²), copie immuable
  * CONTRAINTES : retourne un nouveau tableau trié croissant
  */
-function insertionSort(arr: number[]): number[]
+export function insertionSort(values: number[]): number[] {
 ```
 
-4. **Stub B** — même démarche pour la recherche dichotomique :
+4. **Stub B** — same approach for binary search (sorted array, return index or -1):
 
-```typescript
-// chercher
-function findIndex(arr: number[], target: number): number
+```ts
+// recherche dichotomique
+export function binarySearch(values: number[], target: number): number {
 ```
 
-5. Documentez le nombre d'itérations avant une suggestion acceptable pour chaque stub.
+5. For each stub, document iterations before an acceptable suggestion.
 
-**Success criteria :** deux fonctions avec prompts précis ; algorithmes cohérents ; bilan d'itération documenté.
+**Success criteria :** two functions with precise prompts; correct algorithm; iteration log documented.
 
-> **Solution** : [View solution](../correction/en/correction-02-completions-inline.md)
+**Documentation :** [Best practices](https://docs.github.com/copilot/get-started/best-practices-for-using-github-copilot)
+
+> **Solution** : [Accéder à la correction](../correction/en/correction-02-completions-inline.md)

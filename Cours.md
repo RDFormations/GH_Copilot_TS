@@ -32,15 +32,16 @@ This course covers day-to-day GitHub Copilot usage: inline completions, Chat, re
 | 5 | Path-specific, commit and review | 3 h |
 | 6 | Best practices and productivity | 2 h |
 
-Each module includes a **lesson**, **exercises** and a **solution**.
+Chaque module comprend un **lesson**, des **exercises** et une **solution**.
 
 ```mermaid
 flowchart LR
- A[Install] --> B[Inline]
- B --> C[Chat]
- C --> D[Instructions]
- D --> E[Agent]
- E --> F[Review]
+    A[Install] --> B[Inline]
+    B --> C[Chat]
+    C --> D[Instructions]
+    D --> S[Skills]
+    S --> E[Agent]
+    E --> F[Review]
 ```
 
 **Next step :** [Module 1 — Introduction](/formations/en-github-copilot-typescript/module-01-introduction)
@@ -49,7 +50,7 @@ flowchart LR
 
 # Module 1 — Introduction to GitHub Copilot
 
-This module covers GitHub Copilot for development in **TypeScript**. It covers what Copilot is, which mode to use, and how to verify your VS Code setup.
+This module covers GitHub Copilot basics for **TypeScript** development: what the tool is, which mode to use, and how to verify your VS Code setup.
 
 **Estimated duration :** 2 h.
 
@@ -86,12 +87,12 @@ GitHub Copilot est un assistant de programmation basé sur l'intelligence artifi
 
 GitHub Copilot propose plusieurs **niveaux d'autonomie**. La formation s'articule autour du mode **Agent** et de sa personnalisation (**Instructions**, **Skills**), tout en conservant les **completions inline** pour l'écriture au fil de l'eau.
 
-| Version | Niveau d'autonomie | Description | Usage principal |
+| Version              | Niveau d'autonomie | Description                                    | Usage principal                         |
 | -------------------- | ------------------ | ---------------------------------------------- | --------------------------------------- |
-| **Copilot (inline)** | Faible | Suggestions de code directement dans l'éditeur | Complétion au quotidien, boilerplate |
-| **Copilot Chat** | Moyen | Conversation (Ask, Edit, Plan) | Questions, explications, refactoring |
-| **Mode Agent** | Élevé | Planifie, modifie plusieurs fichiers, exécute | Tâches multi-fichiers, debug, migration |
-| **Copilot CLI** | Élevé | Agent en ligne de commande | Shell, tests, CI, scripts |
+| **Copilot (inline)** | Faible             | Suggestions de code directement dans l'éditeur | Complétion au quotidien, boilerplate    |
+| **Copilot Chat**     | Moyen              | Conversation (Ask, Edit, Plan)                 | Questions, explications, refactoring    |
+| **Mode Agent**       | Élevé              | Planifie, modifie plusieurs fichiers, exécute  | Tâches multi-fichiers, debug, migration |
+| **Copilot CLI**      | Élevé              | Agent en ligne de commande                     | Shell, tests, CI, scripts               |
 
 **Copilot inline** reste le point d'entrée : dès qu'on tape du code, des suggestions apparaissent en gris (`Tab` pour accepter). Voir le **Module 2**.
 
@@ -146,7 +147,7 @@ En entreprise (Copilot Business/Enterprise), les administrateurs ont accès à u
 
 # Module 2 — Inline completions and context
 
-After [module 1](/formations/en-github-copilot-typescript/module-01-introduction) we set up Copilot. **Inline completions** speed up TypeScript boilerplate (DTOs, validators, tests). This module covers shortcuts, context and comment-prompts.
+In [module 1](/formations/en-github-copilot-typescript/module-01-introduction) we set up Copilot. **Inline completions** speed up TypeScript boilerplate (utility functions, tests). This module covers shortcuts, context and comment-prompts.
 
 **Estimated duration :** 3 h.
 
@@ -166,15 +167,15 @@ Les **completions inline** sont le mode le plus utilisé au quotidien. Une fois 
 
 ## 2.1 Essential keyboard shortcuts
 
-| Action | Raccourci (Windows/Linux) | Raccourci (Mac) |
+| Action                           | Raccourci (Windows/Linux) | Raccourci (Mac) |
 | -------------------------------- | ------------------------- | --------------- |
-| Accepter la suggestion | `Tab` | `Tab` |
-| Rejeter la suggestion | `Échap` | `Échap` |
-| Suggestion suivante | `Alt + ]` | `Option + ]` |
-| Suggestion précédente | `Alt + [` | `Option + [` |
-| Accepter le mot suivant | `Ctrl + →` | `Cmd + →` |
-| Déclencher manuellement | `Alt + \` | `Option + \` |
-| Ouvrir le panneau de suggestions | `Ctrl + Enter` | `Ctrl + Enter` |
+| Accepter la suggestion           | `Tab`                     | `Tab`           |
+| Rejeter la suggestion            | `Échap`                   | `Échap`         |
+| Suggestion suivante              | `Alt + ]`                 | `Option + ]`    |
+| Suggestion précédente            | `Alt + [`                 | `Option + [`    |
+| Accepter le mot suivant          | `Ctrl + →`                | `Cmd + →`       |
+| Déclencher manuellement          | `Alt + \`                 | `Option + \`    |
+| Ouvrir le panneau de suggestions | `Ctrl + Enter`            | `Ctrl + Enter`  |
 
 Le panneau de suggestions (`Ctrl + Enter`) ouvre une fenêtre avec jusqu'à 10 suggestions alternatives. Utile quand la première suggestion ne convient pas.
 
@@ -201,9 +202,9 @@ Le commentaire guide Copilot sur l'algorithme attendu.
 
 ```typescript
 interface Employee {
- name: string;
- age: number;
- salary: number;
+  name: string;
+  age: number;
+  salary: number;
 }
 ```
 
@@ -229,9 +230,9 @@ Si vous avez `utils.types.ts` ouvert avec des interfaces, Copilot les utilisera 
 **Les imports influencent les suggestions :**
 
 ```typescript
-import { Router } from "express"; // Copilot suggère des routes REST
+import { Router } from "express";     // Copilot suggère des routes REST
 import React, { useState } from "react"; // Copilot suggère des composants/hooks
-import { z } from "zod"; // Copilot suggère des schémas de validation
+import { z } from "zod";              // Copilot suggère des schémas de validation
 ```
 
 **Le code environnant guide la génération :**
@@ -241,7 +242,7 @@ Si les fonctions précédentes utilisent un style particulier (gestion d'erreurs
 // Si votre code existant fait ceci :
 const result = await fetch(url);
 if (!result.ok) {
- throw new ApiError(result.status, await result.text());
+  throw new ApiError(result.status, await result.text());
 }
 
 // Copilot reproduira ce pattern de gestion d'erreur HTTP
@@ -259,12 +260,12 @@ La **fenêtre de contexte** (ou _context window_) est la quantité maximale de t
 
 **Pourquoi c'est important :**
 
-| Conséquence | Explication |
+| Conséquence                       | Explication |
 | --------------------------------- | ----------- |
-| **Perte de contexte** | Un gros fichier + historique chat peuvent faire « oublier » le début. |
-| **Suggestions moins cohérentes** | Si vos conventions ne tiennent plus dans la fenêtre, Copilot revient à des patterns génériques. |
+| **Perte de contexte**             | Un gros fichier + historique chat peuvent faire « oublier » le début. |
+| **Suggestions moins cohérentes**  | Si vos conventions ne tiennent plus dans la fenêtre, Copilot revient à des patterns génériques. |
 | **Réponses incomplètes en Agent** | Sur un gros dépôt, l'agent doit cibler les bons fichiers. |
-| **Coût de qualité du prompt** | Un contexte pertinent vaut mieux qu'un contexte volumineux. |
+| **Coût de qualité du prompt**     | Un contexte pertinent vaut mieux qu'un contexte volumineux. |
 
 **Best practices pour optimiser la fenêtre :**
 
@@ -340,8 +341,8 @@ Un prompt efficace suit la structure **Quoi / Comment / Contraintes** :
  * QUOI : Recherche un élément dans un tableau trié
  * COMMENT : Recherche dichotomique (binary search)
  * CONTRAINTES :
- * - Tableau trié croissant
- * - Retourne l'index ou -1
+ *   - Tableau trié croissant
+ *   - Retourne l'index ou -1
  */
 function binarySearch(arr: readonly number[], target: number): number
 ```
@@ -353,8 +354,8 @@ Autre exemple :
  * QUOI : Clone profond d'un arbre binaire typé
  * COMMENT : Parcours récursif avec spread immuable
  * CONTRAINTES :
- * - Retourne null si la racine est null
- * - Préserver le typage générique TreeNode<T>
+ *   - Retourne null si la racine est null
+ *   - Préserver le typage générique TreeNode<T>
  */
 function deepCopyTree<T>(root: TreeNode<T> | null): TreeNode<T> | null
 ```
@@ -384,7 +385,7 @@ Accepter une suggestion pour le squelette, puis supprimer certaines parties et r
 
 # Module 3 — Chat and interaction modes
 
-After [inline completions](/formations/en-github-copilot-typescript/module-02-completions-inline), This module covers **Copilot Chat** to debug and plan TypeScript refactorings.
+After [inline completions](/formations/en-github-copilot-typescript/module-02-completions-inline), this module covers **Copilot Chat** to debug and plan TypeScript refactorings.
 
 **Estimated duration :** 3 h.
 
@@ -401,12 +402,12 @@ After [inline completions](/formations/en-github-copilot-typescript/module-02-co
 
 Copilot Chat propose plusieurs **modes** selon le niveau d'autonomie souhaité. Ils partagent les **Instructions** du projet ; seuls **Agent** et partiellement **Ask** exploitent les **Skills** (voir Module 4).
 
-| Mode | Autonomie | Comportement | Exemple en TypeScript |
+| Mode       | Autonomie | Comportement                                      | Exemple en TypeScript                          |
 | ---------- | --------- | ------------------------------------------------- | ------------------------------------------------- |
-| **Ask** | Faible | Répond, explique, ne modifie pas les fichiers | « Explique ce hook useEffect et ses dépendances » |
-| **Edit** | Moyenne | Modifie le code sélectionné ou le fichier actif | « Ajoute le typage strict sur ce paramètre any » |
-| **Plan** | Moyenne | Produit un plan détaillé avant d'agir | « Plan pour migrer ce module CommonJS vers ESM » |
-| **Agent** | Élevée | Planifie, édite, exécute, itère | « Corrige toutes les erreurs ESLint sur src/ » |
+| **Ask**    | Faible    | Répond, explique, ne modifie pas les fichiers     | « Explique ce hook useEffect et ses dépendances »           |
+| **Edit**   | Moyenne   | Modifie le code sélectionné ou le fichier actif | « Ajoute le typage strict sur ce paramètre any »     |
+| **Plan**   | Moyenne   | Produit un plan détaillé avant d'agir             | « Plan pour migrer ce module CommonJS vers ESM »  |
+| **Agent**  | Élevée    | Planifie, édite, exécute, itère                  | « Corrige toutes les erreurs ESLint sur src/ »    |
 
 **Ask** — comprendre du code sans modification :
 
@@ -445,14 +446,14 @@ Sélectionner un bloc de code complexe puis demander dans le chat :
 
 ## 3.3 Commandes slash
 
-| Commande | Action |
+| Commande   | Action                                              |
 | ---------- | --------------------------------------------------- |
-| `/explain` | Explique le code sélectionné |
-| `/fix` | Propose une correction pour le code sélectionné |
-| `/tests` | Génère des tests pour le code sélectionné |
-| `/doc` | Génère la documentation (JSDoc / TSDoc) |
-| `/new` | Crée un nouveau fichier/projet |
-| `/clear` | Efface l'historique du chat |
+| `/explain` | Explique le code sélectionné                        |
+| `/fix`     | Propose une correction pour le code sélectionné     |
+| `/tests`   | Génère des tests pour le code sélectionné           |
+| `/doc`     | Génère la documentation (JSDoc / TSDoc) |
+| `/new`     | Crée un nouveau fichier/projet                      |
+| `/clear`   | Efface l'historique du chat                         |
 
 **Exemple avec `/doc` :**
 
@@ -484,11 +485,11 @@ L'**indexation sémantique** permet à Copilot de **comprendre le sens** du code
 - Une question du type « Où est gérée la validation ? » ou `@workspace trouve les handlers dupliqués` s'appuie sur cette index.
 - Les résultats pertinents sont injectés dans la fenêtre de contexte.
 
-| Approche | Limite |
+| Approche                          | Limite |
 | --------------------------------- | ------ |
 | Fichiers ouverts + ligne courante | Ne couvre que ce que vous avez sous les yeux |
-| Recherche par nom de symbole | Rate les implémentations sous un autre nom |
-| **Index sémantique** | Retrouve du code par **intention** (« validation Zod », « middleware auth », « gestion d'erreur API ») |
+| Recherche par nom de symbole      | Rate les implémentations sous un autre nom |
+| **Index sémantique**              | Retrouve du code par **intention** (« validation Zod », « middleware auth », « gestion d'erreur API ») |
 
 **Best practices :**
 
@@ -547,208 +548,156 @@ In [module 3](/formations/en-github-copilot-typescript/module-03-chat-modes) we 
 
 ---
 
-Après les completions inline (Module 2) et le Chat (Module 3), ce module détaille la **personnalisation agentique** : Instructions, Skills et mode Agent.
+> [!note] Definition — Instructions
+> **Permanent** repo rules injected on every interaction. Main file: `.github/copilot-instructions.md`.
 
 > [!note] Definition — Instructions
 > **Permanent** repo rules injected on every interaction. File: `.github/copilot-instructions.md`.
 
-## 4.1 Vue d'ensemble
+## 4.1 Overview
 
-| Concept | Rôle | Quand c'est actif | Fichier typique |
-| ---------------- | ----------------------------------------- | ------------------------------------------ | ---------------------------------------- |
-| **Instructions** | Règles permanentes du projet | **Toujours** (inline, chat, agent) | `.github/copilot-instructions.md` |
-| **Skill** | Workflow spécialisé, chargé à la demande | Quand la tâche correspond à la description | `.github/skills/<nom>/SKILL.md` |
-| **Agent** | Mode autonome qui planifie et exécute | Sur demande explicite (mode Agent) | Interface Chat ou Copilot CLI |
+| Concept | Role | When active | Typical file |
+| ------- | ---- | ----------- | -------------- |
+| **Instructions** | Permanent project rules | **Always** (inline, chat, agent) | `.github/copilot-instructions.md` |
+| **Skill** | Specialized workflow, loaded on demand | When the task matches the description | `.github/skills/<name>/SKILL.md` |
+| **Agent** | Autonomous mode that plans and executes | On explicit request (Agent mode) | Chat panel or Copilot CLI |
 
-Les **Instructions** définissent _comment coder dans ce dépôt_. Les **Skills** enseignent _comment accomplir une tâche répétitive_. L'**Agent** _orchestre_ le tout.
+**Instructions** define _how to code in this repo_. **Skills** teach _how to accomplish a recurring task_. **Agent** _orchestrates_ both.
 
-## 4.2 Qu'est-ce qu'un Agent ?
+| | Instructions | Skill |
+| --- | --- | --- |
+| **Content** | Short rules, project standards | Detailed workflow, scripts, references |
+| **Activation** | Always | Only when the task is relevant |
 
-Un **agent** Copilot est un assistant **autonome** capable de :
+## 4.2 Global Instructions — `.github/copilot-instructions.md`
 
-- **Planifier** une tâche en plusieurs étapes
-- **Lire et modifier** plusieurs fichiers du projet
-- **Exécuter des commandes** dans le terminal
-- **Itérer** jusqu'à un résultat satisfaisant
+File at the repository root (`.github/` folder). Copilot injects it in **every** interaction.
 
-Contrairement à la **completion inline** ou au mode **Ask**, l'agent **agit** sur le dépôt.
+| File | Scope |
+| ---- | ----- |
+| `.github/copilot-instructions.md` | Global — entire repo |
+| `.github/instructions/*.md` | Path-specific (`applyTo` in YAML header) |
+| Personal instructions | GitHub → Settings → Copilot (all your projects) |
 
-**Exemple concret en TypeScript :**
-
-```
-Mode Agent : « Corrige toutes les erreurs TypeScript strict sur ce monorepo »
-→ Lance tsc --noEmit sur chaque package
-→ Analyse les diagnostics (fichier:ligne)
-→ Corrige les types et imports
-→ Relance les tests Vitest
-```
-
-## 4.3 Qu'est-ce qu'une Instruction ?
-
-Les **Instructions** sont des consignes **permanentes** injectées à **chaque** interaction.
-
-Elles répondent à : _« Quelles sont les règles de ce projet TypeScript ? »_
-
-| Fichier | Portée |
-| ------------------------------------ | --------------------------------------------------- |
-| `.github/copilot-instructions.md` | Global — tout le dépôt |
-| `.github/instructions/*.md` | Par chemin (applyTo: "src/**/*.ts") |
-| Instructions utilisateur (paramètres)| Tous vos projets |
-
-**Exemple pour un projet TypeScript :**
+**Example:**
 
 ```markdown
-# Instructions pour ce projet TypeScript
+# Instructions — TypeScript project
 
-- TypeScript strict (`strict: true`), interdire `any` sauf commentaire `@reason`
-- camelCase pour variables/fonctions, PascalCase pour types et composants React
-- Préférer `async/await` aux Promises chaînées avec `.then()`
-- Documenter l'API publique avec JSDoc (@param, @returns)
-- Gestion d'erreurs : classes d'erreur typées ou Result<T, E>, pas de throw nu sans contexte
-- Exécuter mentalement `tsc --noEmit` avant de suggérer du code
+- `strict: true` ; avoid `any` on public API
+- camelCase for variables/functions ; PascalCase for types and React components
+- Prefer `async/await` over `.then()` chains
+- JSDoc on public API (`@param`, `@returns`)
+- Typed errors or `Result<T, E>` — no bare `throw` without context
+- Before suggesting code: mentally run `tsc --noEmit`
 ```
 
-**Quand utiliser les Instructions :**
+**Best practices:**
 
-- Conventions de nommage et style
-- strict mode, conventions React, règles ESLint du projet
-- Consignes pédagogiques (do not complete exercise stubs)
+- Keep it **short** (≤ 200 lines) — details belong in a Skill or path-specific instruction (module 5).
+- Document _why_ a rule exists, not only _what_.
+- Pedagogical rules: do not complete exercise stubs for students.
 
-> Les Instructions restent **courtes et générales**. Pour un workflow détaillé, préférer un **Skill**.
+> Instructions stay **general**. For a detailed workflow, prefer a **Skill**.
 
-## 4.4 Qu'est-ce qu'un Skill ?
+## 4.3 Skills — `.github/skills/<name>/SKILL.md`
 
-Un **Skill** est un dossier avec `SKILL.md` et, optionnellement, scripts et références. Copilot le **charge quand la tâche correspond** à la description.
+> [!note] Definition — Skill
+> Folder with `SKILL.md` (`name`, `description` in YAML frontmatter). Copilot loads the skill **when the task matches** the YAML description.
 
-**Structure :**
+**Structure:**
 
 ```
 .github/skills/
-└── lint-and-typecheck/
- ├── SKILL.md
- ├── scripts/
- │ └── run_checks.sh
- └── references/
- └── patterns.md
+└── lint-and-check/
+    ├── SKILL.md
+    ├── scripts/
+    └── references/
 ```
 
-**Exemple de `SKILL.md` :**
+**Example `SKILL.md`:**
 
 ```markdown
 ---
-name: lint-and-typecheck
-description: Vérifie le typage strict et ESLint sur un projet TypeScript. Utiliser quand l'utilisateur mentionne tsc, ESLint, type error, lint ou strict mode.
+name: lint-and-check
+description: Checks strict typing and ESLint. Use when the user mentions tsc, ESLint, type error, lint or strict mode.
 ---
 
 ## Workflow
 
-1. Identifier les scripts du projet (`npm run lint`, `npm run typecheck`)
-2. Exécuter `tsc --noEmit` puis `eslint src/`
-3. Pour chaque erreur : localiser fichier:ligne, corriger types/imports
-4. Relancer les tests (`npm test` ou `vitest run`)
-5. Itérer jusqu'à 0 erreur tsc et eslint
-
-## Patterns fréquents
-
-- Usage implicite de `any` ou cast `as unknown as`
-- Imports manquants ou types incorrects sur les props React
-- Promises non awaitées dans les handlers async
+1. Find project scripts (`npm run lint`, `npm run typecheck`)
+2. Run `tsc --noEmit` then `eslint src/`
+3. Fix types/imports per file
+4. Re-run `vitest run` or `npm test`
 ```
 
-**Instructions vs Skill :**
+| Action | Documentation |
+| ------ | ------------- |
+| Create a skill | [About agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) |
+| Repository instructions | [Repository custom instructions](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) |
 
-| | Instructions | Skill |
-| ------------------ | ------------------------------------ | ------------------------------------------ |
-| **Contenu** | Règles courtes, standards du projet | Workflow détaillé, scripts, références |
-| **Activation** | Toujours | Seulement si la tâche est pertinente |
-| **Exemple** | « strict: true, pas de any » | « Procédure complète lint + typecheck + tests » |
+## 4.4 Agent mode in practice
 
-## 4.5 Schéma explicatif — comment tout s'articule
+**Agent mode** (Module 3) applies the Instructions and Skills configured above.
+
+**Capabilities:**
+
+- Run terminal commands (`npm test, tsc --noEmit, eslint`)
+- Edit multiple files in sequence
+- Iterate until a measurable goal is met or report a blocker
+
+**Example:**
+
+```
+Agent mode: "Fix all TypeScript strict and ESLint errors under src/"
+→ Runs tsc and eslint, fixes files, re-runs tests
+```
+
+**Best practices:**
+
+- **Measurable** goal ("0 gcc warnings", "green tests")
+- Review the diff before commit
+- Let semantic indexing finish on large repos
+
+## 4.5 Architecture diagram
 
 ```mermaid
 flowchart TB
- subgraph Dev["👤 Développeur"]
- Q["Prompt / demande<br/>ex. « Corrige les erreurs ESLint »"]
- end
-
- subgraph Modes["Modes Copilot"]
- direction TB
- Inline["Completion inline<br/>suggestion à la ligne"]
- Ask["Chat — Ask"]
- Edit["Chat — Edit"]
- Plan["Chat — Plan"]
- Agent["Mode Agent<br/>autonomie complète"]
- end
-
- subgraph Perso["Personnalisation du dépôt"]
+ subgraph Perso["Customization"]
  Inst["Instructions<br/>.github/copilot-instructions.md"]
- Skill["Skills<br/>.github/skills/&lt;nom&gt;/SKILL.md"]
- PromptF["Prompts<br/>.github/prompts/*.md"]
+ Skill["Skills<br/>.github/skills/"]
  end
-
- subgraph Outils["Outils de l'agent"]
- Term["Terminal<br/>npm test, tsc, eslint"]
- Files["Édition multi-fichiers"]
- Search["Index sémantique"]
+ subgraph Modes["Modes"]
+ Inline["Inline"]
+ Chat["Chat Ask/Edit/Plan"]
+ Agent["Agent"]
  end
-
- Q --> Inline
- Q --> Ask
- Q --> Edit
- Q --> Plan
- Q --> Agent
-
- Inst -.->|"Toujours"| Inline
- Inst -.->|"Toujours"| Ask
- Inst -.->|"Toujours"| Edit
- Inst -.->|"Toujours"| Agent
-
- Skill -.->|"Si pertinent"| Agent
- Skill -.->|"Si pertinent"| Ask
-
- Agent --> Term
- Agent --> Files
- Agent --> Search
- Agent -->|"Itérer"| Agent
-
- Plan -->|"Plan validé →"| Agent
+ Inst -.->|"Always"| Inline
+ Inst -.->|"Always"| Chat
+ Inst -.->|"Always"| Agent
+ Skill -.->|"When relevant"| Agent
+ Agent --> Term["Terminal"]
+ Agent --> Files["Multi-file edits"]
 ```
 
-**Lecture du schéma :**
+## 4.6 Minimal setup
 
-1. **Instructions** : toujours présentes — standards strict, camelCase, pas de any.
-2. **Skills** : chargés **à la demande**.
-3. **Agent** : terminal + éditions + itérations.
-4. **Completion inline** : rapide, localisée ; bénéficie des Instructions.
+1. **Global Instructions** — `.github/copilot-instructions.md`
+2. **Test instructions** — `.github/instructions/tests.md` with `applyTo: "**/*.spec.ts,**/*.test.ts"`
+3. **One domain skill** — `.github/skills/lint-and-check/SKILL.md`
+4. **Test in Agent** — `@workspace Fix TypeScript strict and ESLint errors under src/`
 
-## 4.6 Mise en place minimale pour un projet TypeScript
+## 4.7 Reusable prompts (optional)
 
-**Étape 1 — Instructions globales** (`.github/copilot-instructions.md`)
-
-**Étape 2 — Instructions par chemin** (`.github/instructions/tests.md` avec `applyTo: "**/*.spec.ts,**/*.test.ts"`) : Adapter aux tests (Vitest/Jest, pas de mock excessif).
-
-**Étape 3 — Un skill métier** (`.github/skills/lint-and-typecheck/SKILL.md`)
-
-**Étape 4 — Tester en mode Agent** :
-
-```
-@workspace Corrige les erreurs TypeScript strict et ESLint sur src/
-```
-
-## 4.7 Prompts réutilisables (complément)
+`.github/prompts/*.prompt.md` — templates for recurring requests (complement to Skills).
 
 ```markdown
 <!-- .github/prompts/new-module.prompt.md -->
-
-Crée un nouveau module TypeScript avec :
-
-- Un fichier `index.ts` exportant l'API publique
-- Types/interfaces dans `types.ts`
-- Tests Vitest dans `__tests__/`
-- JSDoc sur chaque export public
+Create a new module with:
+- `index.ts` exporting the public API
+- Types/interfaces in `types.ts`
+- Vitest tests in `__tests__/`
 ```
-
----
 
 ---
 
@@ -945,12 +894,12 @@ Copilot connaît les implémentations standards et le boilerplate (React, Expres
 ```typescript
 // Demander : "Génère les tests Vitest pour binarySearch"
 describe("binarySearch", () => {
- it("finds existing element", () => {
- expect(binarySearch([1, 3, 5, 7, 9], 7)).toBe(3);
- });
- it("returns -1 when not found", () => {
- expect(binarySearch([1, 3, 5, 7, 9], 4)).toBe(-1);
- });
+  it("finds existing element", () => {
+    expect(binarySearch([1, 3, 5, 7, 9], 7)).toBe(3);
+  });
+  it("returns -1 when not found", () => {
+    expect(binarySearch([1, 3, 5, 7, 9], 4)).toBe(-1);
+  });
 });
 ```
 

@@ -15,11 +15,11 @@
 3. Enter the signature with a comment describing `ID-00042` format (do not implement body):
 
 ```ts
-export function format_id(id: number): string
+export function formatId(id: number): string
 ```
 
 4. Accept completion with `Tab` (or partially `Ctrl + →`).
-5. Test that `format_id(42) === "ID-00042"`.
+5. Test that `formatId(42) === "ID-00042"`.
 6. Note: manual edit rate (none / light / full rewrite).
 
 **Success criteria :** Copilot connected ; runnable function ; `ID-00042` for id=42.

@@ -15,11 +15,11 @@
 3. Saisissez la signature avec un commentaire décrivant le format `ID-00042` (sans implémenter le corps) :
 
 ```ts
-export function format_id(id: number): string
+export function formatId(id: number): string
 ```
 
 4. Acceptez la complétion avec `Tab` (ou partiellement `Ctrl + →`).
-5. Testez que `format_id(42) === "ID-00042"`.
+5. Testez que `formatId(42) === "ID-00042"`.
 6. Notez : taux de modification manuelle (aucune / légère / refonte).
 
 **Critère de réussite :** Copilot connecté ; fonction exécutable ; `ID-00042` pour id=42.

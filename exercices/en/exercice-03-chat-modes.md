@@ -1,6 +1,6 @@
 # Exercices — Chat and interaction modes
 
-> **Context** — An SLA calculation contains a bug. Tests fail: deadline is sometimes before createdAt.
+> **Context** — A date calculation module contains a bug. Tests fail: deadline is sometimes before createdAt.
 
 ## Exercice — Ask then Edit on an SLA bug
 
@@ -8,18 +8,18 @@
 
 ### Instructions
 
-1. Create `src/utils/date_calculator.ts` avec l échantillon buggy :
+1. Create `src/utils/dateUtils.ts` avec l échantillon buggy :
 
 ```ts
 export type TicketPriority = "low" | "normal" | "critical";
 
 const SLA_HOURS: Record<TicketPriority, number> = { low: 72, normal: 48, critical: 4 };
 
-export function add_hours_to_date(createdAt: Date, priority: TicketPriority): Date {
- const hours = SLA_HOURS[priority];
- const deadline = new Date(createdAt);
- deadline.setHours(deadline.getHours() - hours); // BUG
- return deadline;
+export function calculateSlaDeadline(createdAt: Date, priority: TicketPriority): Date {
+  const hours = SLA_HOURS[priority];
+  const deadline = new Date(createdAt);
+  deadline.setHours(deadline.getHours() - hours); // BUG
+  return deadline;
 }
 ```
 

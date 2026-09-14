@@ -15,20 +15,20 @@ Vérifiez que Copilot est opérationnel avant de poursuivre les modules suivants
 ### Étape 2 — Signature et commentaire
 
 ```ts
-/** Formate un ID ticket : préfixe FB-, numéro sur 5 chiffres. */
-export function format_id(id: number): string {
+/** Formate un identifiant : préfixe ID-, numéro sur 5 chiffres. */
+export function formatId(id: number): string {
 ```
 
 ### Étape 3 — Acceptation et test
 
-**Vérification :** `format_id(42) === "ID-00042"`
+**Vérification :** `formatId(42) === "ID-00042"`
 
 ## Pièges fréquents
 
 | Symptôme | Piste |
 | -------- | ----- |
 | Pas de suggestion | Vérifier licence Copilot et connexion GitHub |
-| Format incorrect (FB-42) | Préciser zéros à gauche dans le commentaire |
+| Format incorrect (ID-42) | Préciser zéros à gauche dans le commentaire |
 
 
 ## Documentation

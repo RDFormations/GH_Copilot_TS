@@ -15,20 +15,20 @@ Verify Copilot works before continuing to the next modules.
 ### Step 2 — Signature and comment
 
 ```ts
-/** Format ticket ID: FB- prefix, 5-digit zero-padded number. */
-export function format_id(id: number): string {
+/** Format an ID: ID- prefix, 5-digit zero-padded number. */
+export function formatId(id: number): string {
 ```
 
 ### Step 3 — Accept and test
 
-**Verification :** `format_id(42) === "ID-00042"`
+**Verification :** `formatId(42) === "ID-00042"`
 
 ## Common pitfalls
 
 | Symptom | Fix |
 | -------- | ----- |
 | No suggestion | Check Copilot license and GitHub sign-in |
-| Wrong format (FB-42) | Specify zero-padding in comment |
+| Wrong format (ID-42) | Specify zero-padding in comment |
 
 
 ## Documentation
