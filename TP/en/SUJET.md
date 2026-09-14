@@ -12,7 +12,7 @@ This lab offers a **reduced version**, adapted for a **TypeScript** course and G
 
 | File | Role |
 | ---- | ---- |
-| `SUJET.md` | Assignment (this document) |
+| `en/SUJET.md` | Assignment (this document) |
 | `checker.ts` | **Standalone** checker — reads operations from stdin |
 | `scripts/` | Test scripts (`test_checker_50.sh`, `run_batch_50.sh`) |
 
@@ -31,7 +31,7 @@ Write a **`push_swap`** program that:
 ### Example
 
 ```bash
-npx tsx src/push_swap.ts 3 1 2
+npx gcc src/push_swap.c 3 1 2
 ```
 
 Possible output:
@@ -47,7 +47,7 @@ pa
 Verification with the provided checker:
 
 ```bash
-npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
+npx gcc src/push_swap.c 3 1 2 | npm run checker -- 3 1 2
 # expected: OK
 ```
 
@@ -70,7 +70,7 @@ npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
 - **`b`**: empty at the start.
 
 ```
-npx tsx src/push_swap.ts 2 1 3
+npx gcc src/push_swap.c 2 1 3
 
 Stack a (bottom → top):  2  1  3     ← top = 3
 Stack b                  : (empty)
@@ -108,11 +108,11 @@ Each operation modifies the stacks. If the operation is **valid**, `push_swap` *
 Examples:
 
 ```bash
-npx tsx src/push_swap.ts          # nothing, exit 0
-npx tsx src/push_swap.ts 1 1      # Error, exit 1
-npx tsx src/push_swap.ts -3 2     # Error, exit 1
-npx tsx src/push_swap.ts 1 2 abc  # Error, exit 1
-npx tsx src/push_swap.ts 42       # Error (single integer), exit 1
+npx gcc src/push_swap.c          # nothing, exit 0
+npx gcc src/push_swap.c 1 1      # Error, exit 1
+npx gcc src/push_swap.c -3 2     # Error, exit 1
+npx gcc src/push_swap.c 1 2 abc  # Error, exit 1
+npx gcc src/push_swap.c 42       # Error (single integer), exit 1
 ```
 
 ---
@@ -121,18 +121,18 @@ npx tsx src/push_swap.ts 42       # Error (single integer), exit 1
 
 ```
 TP/
-├── SUJET.md
+├── en/SUJET.md
 ├── checker.ts           # provided — do not modify
 ├── package.json
 ├── scripts/
 │   ├── test_checker_50.sh
 │   └── run_batch_50.sh
 └── src/                 # to create
-    ├── stack.ts         # stack: init, push, pop, isSorted?, etc.
-    ├── operations.ts    # sa, sb, … rrr
-    ├── parse.ts         # argument validation
-    ├── sort.ts          # sorting strategy
-    └── push_swap.ts     # entry point
+    ├── stack.c         # stack: init, push, pop, isSorted?, etc.
+    ├── operations.c    # sa, sb, … rrr
+    ├── parse.c         # argument validation
+    ├── sort.c          # sorting strategy
+    └── push_swap.c     # entry point
 ```
 
 ---
@@ -144,7 +144,7 @@ cd TP
 npm install
 
 # Manual unit test
-npx tsx src/push_swap.ts 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
+npx gcc src/push_swap.c 5 2 8 1 4 | npm run checker -- 5 2 8 1 4
 # OK
 
 # 50 random values (configure PUSH_SWAP if needed)
@@ -157,8 +157,8 @@ bash scripts/run_batch_50.sh 5
 Useful variables for scripts:
 
 ```bash
-export PUSH_SWAP="npx tsx src/push_swap.ts"
-export CHECKER="npx tsx checker.ts"
+export PUSH_SWAP="npx gcc src/push_swap.c"
+export CHECKER="npx gcc checker.ts"
 ./scripts/test_checker_50.sh 3
 ```
 
@@ -166,8 +166,8 @@ export CHECKER="npx tsx checker.ts"
 
 ## GitHub Copilot — lab guidelines
 
-1. **Comment-prompts** with JSDoc before each block (`/** pb: pop top of a, push onto b */`).
-2. Keep **types** (`stack.ts`, interfaces) open while writing operations.
+1. **Comment-prompts** with commentaires before each block (`/** pb: pop top of a, push onto b */`).
+2. Keep **types** (`stack.c`, interfaces) open while writing operations.
 3. Use **Chat** to explain sorting with 3 elements — not to deliver an uncomprehended solution.
 4. **Validate** with the checker and `tsc --noEmit`.
 
@@ -175,7 +175,7 @@ export CHECKER="npx tsx checker.ts"
 
 ## Deliverable
 
-- Repository or archive containing your `push_swap` runnable with `npx tsx src/push_swap.ts`.
+- Repository or archive containing your `push_swap` runnable with `npx gcc src/push_swap.c`.
 - Short `README`: name, build and test commands.
 
 ---

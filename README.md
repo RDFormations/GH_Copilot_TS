@@ -4,16 +4,19 @@ https://github.com/RDFormations/GH_Copilot_TS
 
 # GH Copilot — TypeScript Lab
 
-GitHub Copilot training adapted for **TypeScript**: course material, guided exercises, and a mini push_swap lab.
+GitHub Copilot training adapted for **TypeScript**: course material, guided exercises (FR/EN), and a mini push_swap lab.
 
 ## Contents
 
-| Folder                   | Description                          |
-| ------------------------ | ------------------------------------ |
-| `Cours.md` / `Cours.pdf` | Training material (6 modules)        |
-| `exercices/`             | Files to complete with Copilot       |
-| `correction/`            | Reference solutions                  |
-| `TP/`                    | Mini push_swap — stacks and operations |
+| Folder | Description |
+| ------ | ----------- |
+| `Cours.md` / `Cours.pdf` | Training material (6 modules, EN) |
+| `exercices/fr/` | Exercise sheets (FR) + code stubs `.ts` |
+| `exercices/en/` | Exercise sheets (EN) + same code stubs |
+| `correction/fr/` | Solutions (FR) + corrected code |
+| `correction/en/` | Solutions (EN) + corrected code |
+| `TP/fr/SUJET.md` | push_swap lab assignment (French) |
+| `TP/en/SUJET.md` | push_swap lab assignment (English) |
 
 ## Prerequisites
 
@@ -25,18 +28,18 @@ GitHub Copilot training adapted for **TypeScript**: course material, guided exer
 
 ```bash
 npm install
-npm run ex:01   # bubble sort
+npm run ex:01   # bubble sort (uses exercices/fr/)
 npm run ex:02   # Employee struct + serialization
 npm run ex:03   # CSV parsing
 
 npm run corr:01 # solution
 ```
 
+For English instructions, open `exercices/en/exercice-*.md`.
+
 ## push_swap Lab
 
-**Provided to students:** `TP/SUJET.md`, `TP/checker.ts` (standalone), `TP/scripts/`.
-
-The `push_swap` implementation must be developed entirely in `TP/src/`.
+**Provided:** `TP/fr/SUJET.md` or `TP/en/SUJET.md`, `TP/checker.ts`, `TP/scripts/`.
 
 ```bash
 cd TP
@@ -47,11 +50,3 @@ npx tsx src/push_swap.ts 3 1 2 | npm run checker -- 3 1 2
 
 npm run test:50
 ```
-
-See `TP/SUJET.md` for the full assignment.
-
----
-
-## `test.ts` code explanation
-
-The `test.ts` file contains a TypeScript function `calculateAverageSalary` that takes an array of `Employee` objects and returns the average salary. If the array is empty, it returns `0`.
