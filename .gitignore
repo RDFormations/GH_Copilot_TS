@@ -1,5 +1,6 @@
-node_modules/
-dist/
-*.csv
-employees.dat
 .DS_Store
+__pycache__/
+*.pyc
+node_modules/
+importer
+exercice
